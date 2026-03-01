@@ -1,5 +1,16 @@
-on: [push, pull_request, workflow_dispatch]
-
 jobs:
   build:
-    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build
+        uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+        with:
+          build_dir: build
+        secrets: inherit
+
+      - name: Dump DTS
+        run: |
+          find . -name zephyr.dts
+          grep -R "i2c" .
