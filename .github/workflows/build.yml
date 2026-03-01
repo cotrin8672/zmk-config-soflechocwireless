@@ -20,12 +20,9 @@ jobs:
           manifest-file-name: west.yml  # ← 既定値だけど明示してもOK
           toolchains: arm-zephyr-eabi
           sdk-version: 0.16.9
-
-      - name: Init & update west
-        run: |
-          west init -l config
-          west update
-          west zephyr-export
+          
+      - name: zephyr-export
+        run: west zephyr-export
 
       - name: Build settings_reset and grep I2C labels
         run: |
