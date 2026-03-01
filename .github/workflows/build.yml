@@ -1,16 +1,17 @@
+name: Build ZMK
+
+on: [push, pull_request, workflow_dispatch]
+
 jobs:
   build:
+    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+    secrets: inherit
+
+  dts:
     runs-on: ubuntu-latest
+    needs: build
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Build
-        uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
-        with:
-          build_dir: build
-        secrets: inherit
-
-      - name: Dump DTS
+      - name: Explain
         run: |
-          find . -name zephyr.dts
-          grep -R "i2c" .
+          echo "This job cannot see the build directory from the reusable workflow job."
+          echo "To dump zephyr.dts, upload it as an artifact inside the build job, or run a separate debug build here."
