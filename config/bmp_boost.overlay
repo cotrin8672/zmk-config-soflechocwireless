@@ -1,1 +1,1 @@
-pro_micro_i2c: &i2c0 {};
+pro_micro_i2c: &xiao_i2c {};
