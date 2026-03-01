@@ -8,18 +8,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install west
-        run: pip3 install --user west
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
 
-      - name: Install Zephyr SDK 0.16.9
-        run: |
-          ZSDK_VER=0.16.9
-          ZSDK_DIR=$HOME/zephyr-sdk-$ZSDK_VER
-          wget -q https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v$ZSDK_VER/zephyr-sdk-$ZSDK_VER_linux-x86_64.tar.xz
-          tar -xf zephyr-sdk-$ZSDK_VER_linux-x86_64.tar.xz -C $HOME
-          $ZSDK_DIR/setup.sh -t arm-zephyr-eabi -h -c
-          echo "ZEPHYR_TOOLCHAIN_VARIANT=zephyr" >> $GITHUB_ENV
-          echo "ZEPHYR_SDK_INSTALL_DIR=$ZSDK_DIR" >> $GITHUB_ENV
+      - name: Setup Zephyr (SDK + west modules)
+        uses: zephyrproject-rtos/action-zephyr-setup@v1
+        with:
+          app-path: .
+          toolchains: arm-zephyr-eabi
+          sdk-version: 0.16.9
 
       - name: Init & update west
         run: |
