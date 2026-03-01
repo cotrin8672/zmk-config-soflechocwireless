@@ -13,10 +13,11 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Setup Zephyr (SDK + west modules)
+      - name: Setup Zephyr (SDK + west)
         uses: zephyrproject-rtos/action-zephyr-setup@v1
         with:
-          app-path: .
+          app-path: config              # ← west.yml がある場所
+          manifest-file-name: west.yml  # ← 既定値だけど明示してもOK
           toolchains: arm-zephyr-eabi
           sdk-version: 0.16.9
 
