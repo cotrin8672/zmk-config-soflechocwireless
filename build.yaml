@@ -15,7 +15,3 @@
 include:
   - board: bmp_boost
     shield: settings_reset
-  - board: bmp_boost
-    shield: sofle_left
-  - board: bmp_boost
-    shield: sofle_right
