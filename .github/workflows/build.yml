@@ -1,33 +1,5 @@
 on: [push, pull_request, workflow_dispatch]
 
 jobs:
-  dts:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      - name: Setup Zephyr (SDK + west)
-        uses: zephyrproject-rtos/action-zephyr-setup@v1
-        with:
-          app-path: config              # ← west.yml がある場所
-          manifest-file-name: west.yml  # ← 既定値だけど明示してもOK
-          toolchains: arm-zephyr-eabi
-          sdk-version: 0.16.9
-          
-      - name: zephyr-export
-        run: west zephyr-export
-
-      - name: Build settings_reset and grep I2C labels
-        run: |
-          west build -s zmk/app -d build -b bmp_boost -- \
-            -DZMK_CONFIG=$GITHUB_WORKSPACE/config \
-            -DSHIELD=settings_reset
-          grep -nE "i2c0:|i2c1:|i2c@|xiao_i2c:" build/zephyr/zephyr.dts || true
-
   build:
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
