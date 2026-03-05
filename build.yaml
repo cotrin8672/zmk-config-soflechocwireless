@@ -17,5 +17,6 @@ include:
     shield: sofle_bmp_left
     snippet: studio-rpc-usb-uart
     cmake-args: -DCONFIG_ZMK_STUDIO=y
+
   - board: bmp_boost
     shield: sofle_bmp_right
