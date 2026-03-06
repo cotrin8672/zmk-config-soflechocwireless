@@ -15,7 +15,6 @@
 include:
   - board: bmp_boost/nrf52840/zmk
     shield: sofle_bmp_left
-    snippet: studio-rpc-usb-uart
 
   - board: bmp_boost/nrf52840/zmk
     shield: sofle_bmp_right
