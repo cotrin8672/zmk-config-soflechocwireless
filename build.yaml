@@ -19,3 +19,6 @@ include:
 
   - board: bmp_boost
     shield: sofle_bmp_right
+
+  - board: bmp_boost
+    shield: settings_reset
