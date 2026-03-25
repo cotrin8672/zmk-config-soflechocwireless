@@ -10,6 +10,18 @@
 #include <dt-bindings/zmk/ext_power.h>
 
 / {
+    behaviors {
+        quick_mod_tap: quick_mod_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <220>;
+            quick-tap-ms = <250>;
+            display-name = "QuickModTap";
+            bindings = <&kp>, <&kp>;
+        };
+    };
+
     macros {
         win_shift_s: win_shift_s {
             compatible = "zmk,behavior-macro";
@@ -78,6 +90,18 @@
 &trans     &kp LALT     &kp LCTRL    &kp LSHFT    &trans       &kp CLCK                 &kp PG_DN &kp LEFT  &kp DOWN &kp RIGHT &kp DEL &kp BSPC
 &trans     &kp K_UNDO   &kp K_CUT    &kp K_COPY   &kp K_PASTE  &trans  &trans   &trans  &trans    &trans    &trans   &trans    &trans  &trans
                         &trans       &trans       &trans       &trans  &trans   &trans  &trans    &trans    &trans   &trans
+            >;
+
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+        };
+
+        game_layer {
+            bindings = <
+&trans &trans &trans &trans &trans &trans                             &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans                             &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans                             &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans &trans &trans              &trans &trans &trans &trans &trans &trans
+              &trans &trans &trans &trans &trans &trans               &trans &trans &trans &trans
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
